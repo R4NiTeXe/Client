@@ -132,7 +132,18 @@ npx vercel deploy --prod  # uploads and deploys; prints the live URL
 ```
 
 Before going live, finish the pending items in `CONTENT-SIGNOFF.md`
-(phone/WhatsApp/email/hours, logo, images, domain).
+(logo, real photos, domain, socials).
+
+**SEO launch checklist** (after the domain is bought):
+1. Set `site.canonicalUrl` in `src/data/company.js` → canonical, `og:url`,
+   and absolute `og:image` (`/og-cover.png`) start emitting automatically.
+2. Add `sitemap.xml` to `public/` (one-URL site: just the homepage) and
+   uncomment the sitemap line in `public/robots.txt`.
+3. Verify the domain in **Google Search Console** and submit the homepage URL.
+4. Replace the placeholder `og-cover.png` / favicons with brand assets when
+   the logo arrives (regenerate via the asset script or any 1200×630 design).
+Brand searches ("atoz engraving kolkata" etc.) should index within days of
+step 3; competitive non-brand keywords additionally need time + backlinks.
 
 ## Motion & smooth scroll
 

@@ -1,0 +1,12 @@
+{
+  "name": "AtoZ Engraving Company — Engraving Services in Kolkata",
+  "short_name": "AtoZ Engraving",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "theme_color": "#101B2D",
+  "background_color": "#101B2D",
+  "display": "browser",
+  "start_url": "."
+}

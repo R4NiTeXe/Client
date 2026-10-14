@@ -15,13 +15,15 @@
  */
 
 export const site = {
-  // Draft SEO copy — final wording confirmed in Phase 7.
-  title: 'AtoZ Engraving Company — Engraving Services',
+  // SEO copy — keyword-rich, honest (only approved services + confirmed city).
+  // Keep in sync with the static tags in index.html.
+  title: 'AtoZ Engraving Company — Engraving Services in Kolkata',
   description:
-    'AtoZ Engraving Company — engraving services, selected work, and direct contact. Call, WhatsApp, or email us.',
+    'Custom engraving, personalised gifts, nameplates & signage, and bulk orders in Kolkata. Call or WhatsApp AtoZ Engraving — every detail confirmed directly with you.',
   themeColor: '#101B2D',
   // Set once the final domain is confirmed (Phase 7/8). Leave empty
-  // until then so no incorrect canonical URL is published.
+  // until then so no incorrect canonical URL is published. When set,
+  // Seo.jsx injects canonical, og:url, and absolute og:image tags.
   canonicalUrl: '',
 }
 
