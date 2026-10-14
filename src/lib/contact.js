@@ -11,18 +11,43 @@ import { contact } from '../data/company.js'
 
 const digitsOnly = (value) => String(value || '').replace(/\D/g, '')
 
+const telOf = (field) => {
+  const number = digitsOnly(field?.e164 || field?.display)
+  return number ? `tel:+${number}` : null
+}
+
+const waOf = (field) => {
+  const number = digitsOnly(field?.e164 || field?.display)
+  return number ? `https://wa.me/${number}` : null
+}
+
 export function telHref() {
   if (contact.phone.status !== 'confirmed') return null
-  const number = digitsOnly(contact.phone.e164 || contact.phone.display)
-  return number ? `tel:+${number}` : null
+  return telOf(contact.phone)
 }
 
 export function waHref() {
   if (contact.whatsapp.status !== 'confirmed') return null
-  const number = digitsOnly(contact.whatsapp.e164 || contact.whatsapp.display)
-  if (!number) return null
-  const base = `https://wa.me/${number}`
+  const base = waOf(contact.whatsapp)
+  if (!base) return null
   const greeting = contact.whatsapp.greeting?.trim()
+  return greeting
+    ? `${base}?text=${encodeURIComponent(greeting)}`
+    : base
+}
+
+export function managerTelHref() {
+  const manager = contact.manager
+  if (!manager || manager.status !== 'confirmed') return null
+  return telOf(manager.phone)
+}
+
+export function managerWaHref() {
+  const manager = contact.manager
+  if (!manager || manager.status !== 'confirmed') return null
+  const base = waOf(manager.whatsapp)
+  if (!base) return null
+  const greeting = manager.whatsapp?.greeting?.trim()
   return greeting
     ? `${base}?text=${encodeURIComponent(greeting)}`
     : base
@@ -68,7 +93,9 @@ export function formatAddress() {
 
 export function formatHours() {
   if (contact.hours.status !== 'confirmed') return null
-  const { days, time } = contact.hours
-  if (!days && !time) return null
-  return [days, time].filter(Boolean).join(': ')
+  const { days, time, closedDays } = contact.hours
+  if (!days && !time && !closedDays) return null
+  const open = [days, time].filter(Boolean).join(' · ')
+  const closed = closedDays ? `${closedDays} closed` : ''
+  return [open, closed].filter(Boolean).join(' · ')
 }

@@ -19,14 +19,19 @@ sheet back filled in.
 
 Confirmed address is live in `src/data/company.js` (with map link).
 
-## 2. Contact details (all currently `pending`)
+## 2. Contact details ✅ RESOLVED (14 Oct 2026)
 
-| Item | Status | Value needed |
+| Item | Status | Value |
 |---|---|---|
-| Phone number | ⬜ pending (client chose to keep pending) | With country code, e.g. `+91 98300 00000` |
-| WhatsApp number | ⬜ pending (client chose to keep pending) | With country code, digits only — may match phone |
-| Business email | ⬜ pending (client chose to keep pending) | e.g. `info@example.com` |
-| Opening hours | ⬜ pending | Days + hours, e.g. `Mon–Sat: 10:00–20:00` |
+| Phone number | ✅ confirmed | `+91 80172 66401` (`e164: 918017266401`) — card opens the call dialer |
+| WhatsApp number | ✅ confirmed | `+91 80172 66401` (`wa.me/918017266401`) — card opens a WhatsApp chat |
+| Manager — Sayan (call) | ✅ confirmed | `+91 87687 49369` (`e164: 918768749369`) — card opens the call dialer |
+| Manager — Sayan (WhatsApp) | ✅ confirmed | `+91 87687 49369` (`wa.me/918768749369`) — card opens a WhatsApp chat |
+| Business email | ✅ confirmed | `tarunmaityatoz@gmail.com` — card opens the mail app |
+| Opening hours | ✅ confirmed | Monday – Saturday, 10:00 AM – 08:00 PM (Sunday closed) |
+
+A live mini map (keyless Google Maps embed of the confirmed address) sits at the
+bottom of the contact section — clicking it opens the location in Google Maps.
 
 ## 3. Identity
 

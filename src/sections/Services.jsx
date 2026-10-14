@@ -6,7 +6,10 @@ import { services } from '../data/services.js'
 
 export default function Services() {
   return (
-    <section id="services" className="bg-surface py-16 sm:py-20 lg:py-24">
+    <section
+      id="services"
+      className="scroll-mt-16 bg-surface py-16 sm:scroll-mt-[4.5rem] sm:py-20 lg:py-24"
+    >
       <Container>
         <SectionHeading
           eyebrow="What we do"

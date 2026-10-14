@@ -24,7 +24,10 @@ export default function WhyChooseUs() {
       }))
 
   return (
-    <section id="why-us" className="bg-navy py-16 text-white sm:py-20 lg:py-24">
+    <section
+      id="why-us"
+      className="scroll-mt-16 bg-navy py-16 text-white sm:scroll-mt-[4.5rem] sm:py-20 lg:py-24"
+    >
       <Container>
         <SectionHeading
           eyebrow="Why choose us"

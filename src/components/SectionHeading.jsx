@@ -1,17 +1,15 @@
-import { useLayoutEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { prefersReducedMotion, EASE_SETTLE } from '../lib/motion.js'
+import { motion, useReducedMotion } from 'motion/react'
+import WordReveal from './WordReveal.jsx'
 
-gsap.registerPlugin(ScrollTrigger)
+const EASE = [0.16, 1, 0.3, 1]
 
 /**
- * Shared section header: eyebrow label + title + optional lead text.
+ * Shared section header: eyebrow label + split-word title + optional lead.
  * `tone` switches colour for dark sections; alignment is opt-in.
  *
- * Animation: a single subtle fade-up per heading (once per page load),
- * skipped when the visitor prefers reduced motion. gsap.from keeps the
- * heading visible if animation never runs.
+ * Motion: eyebrow and lead rise/fade in on first view; the title reveals
+ * word-by-word from a mask. All triggers fire once; reduced motion shows
+ * everything immediately.
  */
 export default function SectionHeading({
   eyebrow,
@@ -23,36 +21,47 @@ export default function SectionHeading({
   className = '',
 }) {
   const isDark = tone === 'dark'
+  const reduce = useReducedMotion()
   const alignment = align === 'center' ? 'items-center text-center' : 'items-start text-left'
-  const rootRef = useRef(null)
-
-  useLayoutEffect(() => {
-    if (prefersReducedMotion()) return undefined
-    const ctx = gsap.context(() => {
-      gsap.from(rootRef.current, {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.85,
-        ease: EASE_SETTLE,
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: 'top 90%',
-          once: true,
-        },
-      })
-    }, rootRef)
-    return () => ctx.revert()
-  }, [])
 
   return (
-    <div ref={rootRef} className={`flex flex-col gap-3 ${alignment} ${className}`}>
+    <div className={`flex flex-col gap-3 ${alignment} ${className}`}>
       {eyebrow ? (
-        <span className={`eyebrow ${isDark ? 'text-gold' : ''}`}>{eyebrow}</span>
+        reduce ? (
+          <span className={`eyebrow ${isDark ? 'text-gold' : ''}`}>{eyebrow}</span>
+        ) : (
+          <motion.span
+            className={`eyebrow ${isDark ? 'text-gold' : ''}`}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.6, ease: EASE }}
+          >
+            {eyebrow}
+          </motion.span>
+        )
       ) : null}
-      <Tag className={isDark ? 'heading-section text-white' : 'heading-section'}>{title}</Tag>
+
+      <WordReveal
+        as={Tag}
+        text={title}
+        className={isDark ? 'heading-section text-white' : 'heading-section'}
+      />
+
       {description ? (
-        <p className={`max-w-2xl text-lead ${isDark ? 'text-white/75' : ''}`}>{description}</p>
+        reduce ? (
+          <p className={`max-w-2xl text-lead ${isDark ? 'text-white/75' : ''}`}>{description}</p>
+        ) : (
+          <motion.p
+            className={`max-w-2xl text-lead ${isDark ? 'text-white/75' : ''}`}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.18 }}
+          >
+            {description}
+          </motion.p>
+        )
       ) : null}
     </div>
   )

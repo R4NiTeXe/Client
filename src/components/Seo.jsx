@@ -41,8 +41,13 @@ function buildStructuredData() {
     }
   }
 
-  if (contact.hours.status === 'confirmed' && contact.hours.days) {
-    data.openingHours = contact.hours.days
+  if (contact.hours.status === 'confirmed' && contact.hours.spec) {
+    data.openingHoursSpecification = {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: contact.hours.spec.dayOfWeek,
+      opens: contact.hours.spec.opens,
+      closes: contact.hours.spec.closes,
+    }
   }
 
   if (site.canonicalUrl) {

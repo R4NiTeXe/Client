@@ -2,6 +2,7 @@ import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import ScrollProgress from './components/ScrollProgress.jsx'
 import Marquee from './components/Marquee.jsx'
+import SmoothScroll from './components/SmoothScroll.jsx'
 import Seo from './components/Seo.jsx'
 import Hero from './sections/Hero.jsx'
 import About from './sections/About.jsx'
@@ -28,17 +29,22 @@ export default function App() {
 
       <Navbar />
 
-      <main id="main">
-        <Hero />
-        <About />
-        <Marquee words={MARQUEE_WORDS} />
-        <Services />
-        <Portfolio />
-        <WhyChooseUs />
-        <Contact />
-      </main>
+      <SmoothScroll>
+        {/* Top offset lives INSIDE the smoother content — ScrollSmoother pins
+            #smooth-wrapper to the viewport, so padding on an outer element
+            would never move the page content. */}
+        <main id="main" className="pt-16 sm:pt-[4.5rem]">
+          <Hero />
+          <About />
+          <Marquee words={MARQUEE_WORDS} />
+          <Services />
+          <Portfolio />
+          <WhyChooseUs />
+          <Contact />
+        </main>
 
-      <Footer />
+        <Footer />
+      </SmoothScroll>
     </div>
   )
 }

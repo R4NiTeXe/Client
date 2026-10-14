@@ -1,4 +1,3 @@
-import { Quote } from 'lucide-react'
 import Container from '../components/Container.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import Reveal from '../components/Reveal.jsx'
@@ -11,7 +10,7 @@ import { company } from '../data/company.js'
  */
 function NameplatePlaceholder() {
   return (
-    <figure className="card-surface relative overflow-hidden p-8 sm:p-10">
+    <figure className="card-surface relative overflow-hidden p-8 sm:p-10" data-speed="1.05">
       {/* Corner screws */}
       <span aria-hidden="true" className="absolute left-3 top-3 size-1.5 rounded-full bg-line" />
       <span aria-hidden="true" className="absolute right-3 top-3 size-1.5 rounded-full bg-line" />
@@ -20,7 +19,7 @@ function NameplatePlaceholder() {
 
       <div
         aria-hidden="true"
-        className="relative mx-auto flex max-w-xs flex-col items-center gap-4 rounded-md border border-gold-deep/60 bg-gradient-to-b from-[#1a2740] to-navy px-8 py-10 shadow-[inset_0_1px_0_rgba(244,179,35,0.25)]"
+        className="relative mx-auto flex max-w-xs flex-col items-center gap-4 rounded-md border border-gold-deep/60 bg-gradient-to-b from-navy-soft to-navy px-8 py-10 shadow-[inset_0_1px_0_rgba(244,179,35,0.25)]"
       >
         <span className="font-display text-xl font-extrabold tracking-tight text-white">
           AtoZ <span className="text-gold">Engraving</span>
@@ -43,13 +42,15 @@ export default function About() {
 
   // overflow-hidden clips the pre-reveal x-offset so it never widens the page
   return (
-    <section id="about" className="overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+    <section
+      id="about"
+      className="scroll-mt-16 overflow-hidden bg-white py-16 sm:scroll-mt-[4.5rem] sm:py-20 lg:py-24"
+    >
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <SectionHeading eyebrow="About us" title={about.heading} />
             <Reveal delay={0.15} className="mt-6 max-w-2xl">
-              <Quote aria-hidden="true" size={22} className="mb-3 text-gold-deep" />
               <p className="text-lead">{about.body}</p>
             </Reveal>
           </div>

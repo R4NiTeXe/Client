@@ -1,7 +1,8 @@
 # AtoZ Engraving Company — Marketing Website
 
 Public, single-page marketing website. React + Vite + JavaScript, Tailwind CSS v4,
-selective DaisyUI, GSAP (restrained), Lucide icons. Static deployment target: Vercel.
+selective DaisyUI, GSAP (ScrollSmoother + ScrollTrigger), motion (text reveals),
+Lucide icons. Static deployment target: Vercel.
 Images: Cloudinary public delivery. **No backend, no database, no forms storing data.**
 
 ## Quick start
@@ -26,6 +27,7 @@ public/
   robots.txt            Allow-all; sitemap added after a domain exists
 src/
   components/           Navbar, Footer, ButtonLink (magnetic CTAs), SectionHeading,
+                        WordReveal (motion text reveals), SmoothScroll (GSAP),
                         Reveal (scroll reveals), ScrollProgress, Marquee,
                         ServiceCard, ProjectCard, Container, Seo (meta + JSON-LD)
   sections/             Hero, About, Services, Portfolio, WhyChooseUs, Contact
@@ -54,11 +56,13 @@ a link — fill the value **and** set `status: 'confirmed'`:
 phone:    { status: 'confirmed', display: '+91 98300 00000', e164: '919830000000' },
 whatsapp: { status: 'confirmed', display: '+91 98300 00000', e164: '919830000000' },
 email:    { status: 'confirmed', address: 'info@example.com' },
-hours:    { status: 'confirmed', days: 'Mon–Sat', time: '10:00–20:00' },
+hours:    { status: 'confirmed', days: 'Mon–Sat', time: '10:00–20:00', closedDays: 'Sunday' },
 ```
 
-Then run `npm run lint && npm run build`. Phone/WhatsApp/email/hours are currently
-**pending by client choice** — the cards honestly say "to be added".
+Then run `npm run lint && npm run build`. Phone/WhatsApp/email/hours — plus the
+manager's separate call & WhatsApp cards (Sayan) — are **confirmed** (14 Oct 2026):
+cards open the dialer, WhatsApp chat, and mail app directly, and a live mini map
+in the contact section opens the location in Google Maps.
 
 ### Services — `src/data/services.js`
 
@@ -129,6 +133,21 @@ npx vercel deploy --prod  # uploads and deploys; prints the live URL
 
 Before going live, finish the pending items in `CONTENT-SIGNOFF.md`
 (phone/WhatsApp/email/hours, logo, images, domain).
+
+## Motion & smooth scroll
+
+- **GSAP ScrollSmoother** gives the page momentum scrolling. The navbar,
+  scroll-progress bar, and skip link live OUTSIDE `#smooth-wrapper`
+  (ScrollSmoother requirement) — keep fixed/sticky UI out of `SmoothScroll`.
+- Parallax uses `data-speed` attributes on layers (hero grid, nameplate).
+  Never put `data-speed` on an element that already has its own transform
+  animation — use a wrapper layer instead.
+- **motion** (`WordReveal`) reveals section titles word-by-word from masks
+  via IntersectionObserver — observe the mask, never the translated inner span.
+- No CSS `scroll-behavior: smooth` — it fights ScrollSmoother (anchor jumps
+  are eased by the smoother itself).
+- Everything degrades under `prefers-reduced-motion`: smoother never created,
+  text renders plain, marquee frozen, progress bar hidden.
 
 ## Security notes
 

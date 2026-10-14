@@ -14,7 +14,10 @@ export default function Portfolio() {
   const hasProjects = projects.length > 0
 
   return (
-    <section id="work" className="bg-white py-16 sm:py-20 lg:py-24">
+    <section
+      id="work"
+      className="scroll-mt-16 bg-white py-16 sm:scroll-mt-[4.5rem] sm:py-20 lg:py-24"
+    >
       <Container>
         <SectionHeading
           eyebrow="Our work"

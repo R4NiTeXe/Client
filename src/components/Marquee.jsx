@@ -22,7 +22,7 @@ export default function Marquee({ words, className = '' }) {
   return (
     <div
       aria-hidden="true"
-      className={`overflow-hidden border-y border-white/10 bg-navy py-5 select-none ${className}`}
+      className={`marquee-strip overflow-hidden border-y border-white/10 bg-navy py-5 select-none ${className}`}
     >
       <div className="flex w-max">
         {track}

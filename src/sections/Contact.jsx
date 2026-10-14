@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { ArrowRight, Clock, ExternalLink, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 import Container from '../components/Container.jsx'
 import SectionHeading from '../components/SectionHeading.jsx'
 import { contact } from '../data/company.js'
@@ -7,6 +7,8 @@ import {
   waHref,
   mailtoHref,
   mapHref,
+  managerTelHref,
+  managerWaHref,
   formatAddress,
   formatHours,
 } from '../lib/contact.js'
@@ -18,6 +20,21 @@ import {
  * unverified number, email, address, or map pin can appear.
  */
 
+// Soft break opportunity after "@" so long email addresses wrap cleanly
+// instead of being cut mid-word by break-words.
+function withSoftBreak(value) {
+  const text = String(value)
+  const at = text.indexOf('@')
+  if (at === -1) return text
+  return (
+    <>
+      {text.slice(0, at + 1)}
+      <wbr />
+      {text.slice(at + 1)}
+    </>
+  )
+}
+
 function ContactCard({
   icon: Icon,
   label,
@@ -25,6 +42,7 @@ function ContactCard({
   href,
   external,
   pendingLabel,
+  note,
   confirmed = Boolean(href),
 }) {
   const interactive = confirmed && Boolean(href)
@@ -43,9 +61,11 @@ function ContactCard({
         <span
           className={`mt-1 break-words text-base font-semibold ${confirmed ? 'text-navy' : 'text-muted'}`}
         >
-          {confirmed ? value : pendingLabel}
+          {confirmed ? withSoftBreak(value) : pendingLabel}
         </span>
-        {confirmed ? null : (
+        {confirmed ? (
+          note ? <span className="mt-1 text-xs text-muted/80">{note}</span> : null
+        ) : (
           <span className="mt-1 text-xs text-muted/80">Pending client confirmation</span>
         )}
       </span>
@@ -53,14 +73,14 @@ function ContactCard({
         <ArrowRight
           aria-hidden="true"
           size={18}
-          className="ml-auto mt-1 shrink-0 self-start text-gold-ink opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-x-0.5"
+          className="absolute right-4 top-4 text-gold-ink opacity-0 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:translate-x-0.5"
         />
       ) : null}
     </>
   )
 
   const className =
-    'card-surface card-lift group flex items-start gap-4 p-5 min-h-11 w-full text-left'
+    'card-surface card-lift group relative flex h-full items-start gap-4 p-5 min-h-11 w-full text-left'
 
   if (!confirmed) {
     return (
@@ -96,11 +116,16 @@ export default function Contact() {
   const wa = waHref()
   const mail = mailtoHref()
   const map = mapHref()
+  const managerTel = managerTelHref()
+  const managerWa = managerWaHref()
   const address = formatAddress()
   const hours = formatHours()
 
   return (
-    <section id="contact" className="bg-surface py-16 sm:py-20 lg:py-24">
+    <section
+      id="contact"
+      className="scroll-mt-16 bg-surface py-16 sm:scroll-mt-[4.5rem] sm:py-20 lg:py-24"
+    >
       <Container>
         <SectionHeading
           eyebrow="Contact"
@@ -132,6 +157,31 @@ export default function Contact() {
             pendingLabel="Email address to be added"
           />
           <ContactCard
+            icon={Phone}
+            label="Manager — call"
+            value={contact.manager?.phone?.display}
+            href={managerTel}
+            pendingLabel="Manager number to be added"
+            note={
+              contact.manager?.name
+                ? `${contact.manager.name} · ${contact.manager.role}`
+                : contact.manager?.role
+            }
+          />
+          <ContactCard
+            icon={MessageCircle}
+            label="Manager — WhatsApp"
+            value={contact.manager?.whatsapp?.display}
+            href={managerWa}
+            external
+            pendingLabel="Manager number to be added"
+            note={
+              contact.manager?.name
+                ? `${contact.manager.name} · ${contact.manager.role}`
+                : contact.manager?.role
+            }
+          />
+          <ContactCard
             icon={MapPin}
             label="Address & directions"
             value={address}
@@ -153,6 +203,38 @@ export default function Contact() {
           Call, WhatsApp, or email links open your phone’s or computer’s own app. Map directions
           open in Google Maps.
         </p>
+
+        {/* Live mini map — keyless Google Maps embed of the confirmed address.
+            The iframe is click-through, so the whole map opens Google Maps. */}
+        {map ? (
+          <figure className="card-surface card-lift mt-8 overflow-hidden">
+            <a
+              href={map}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="group relative block"
+              aria-label="Open AtoZ Engraving Company in Google Maps"
+            >
+              <iframe
+                title="Map showing AtoZ Engraving Company — Muchi Bazar Clock Tower, Ultodanga, Kolkata"
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                  contact.address.mapQuery,
+                )}&z=15&output=embed`}
+                className="pointer-events-none block h-64 w-full border-0 sm:h-80"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <span className="absolute left-3 top-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-navy/90 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur">
+                <MapPin aria-hidden="true" size={13} className="shrink-0 text-gold" />
+                <span className="truncate">Muchi Bazar Clock Tower, Ultodanga</span>
+              </span>
+              <span className="absolute bottom-3 right-3 inline-flex items-center gap-2 rounded-full bg-gold px-4 py-2 text-sm font-bold text-ink shadow-[0_10px_24px_-10px_rgba(11,18,32,0.5)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-0.5">
+                Open in Google Maps
+                <ExternalLink aria-hidden="true" size={14} />
+              </span>
+            </a>
+          </figure>
+        ) : null}
       </Container>
     </section>
   )

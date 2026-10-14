@@ -88,19 +88,26 @@ export const company = {
 
 export const contact = {
   phone: {
-    status: 'pending', // confirmed | pending
-    display: '', // e.g. "+91 98300 00000" (shown to visitors)
-    e164: '', // digits only, with country code, for tel:
+    status: 'confirmed', // confirmed by client 14 Oct 2026
+    display: '+91 80172 66401', // shown to visitors
+    e164: '918017266401', // digits with country code, for tel:
   },
   whatsapp: {
-    status: 'pending', // confirmed | pending
-    display: '',
-    e164: '', // digits only for https://wa.me/<number>
+    status: 'confirmed', // confirmed by client 14 Oct 2026
+    display: '+91 80172 66401',
+    e164: '918017266401', // digits for https://wa.me/<number>
     greeting: '', // optional prefilled message
   },
   email: {
-    status: 'pending', // confirmed | pending
-    address: '',
+    status: 'confirmed', // confirmed by client 14 Oct 2026
+    address: 'tarunmaityatoz@gmail.com',
+  },
+  manager: {
+    status: 'confirmed', // confirmed by client 14 Oct 2026
+    name: 'Sayan',
+    role: 'Manager',
+    phone: { display: '+91 87687 49369', e164: '918768749369' },
+    whatsapp: { display: '+91 87687 49369', e164: '918768749369' },
   },
   address: {
     status: 'confirmed', // confirmed by client 12 Oct 2026 — Variant B
@@ -115,9 +122,16 @@ export const contact = {
       '19H/H2 Harish Neogi Road, Muchi Bazar Clock Tower, Ultodanga, Kolkata 700067',
   },
   hours: {
-    status: 'pending', // confirmed | pending
-    days: '',
-    time: '',
+    status: 'confirmed', // confirmed by client 14 Oct 2026
+    days: 'Monday – Saturday',
+    time: '10:00 AM – 08:00 PM',
+    closedDays: 'Sunday',
+    // Machine-readable hours for schema.org — keep in sync with days/time.
+    spec: {
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '10:00',
+      closes: '20:00',
+    },
   },
   socials: [
     // { platform: 'facebook', url: 'https://...' } — only when supplied.

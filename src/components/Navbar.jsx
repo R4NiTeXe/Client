@@ -56,10 +56,11 @@ export default function Navbar() {
 
   const close = () => setOpen(false)
 
+  // <header> is fixed (not sticky) — required alongside GSAP ScrollSmoother.
   return (
     <header
       ref={headerRef}
-      className={`sticky top-0 z-50 border-b border-white/10 bg-navy text-white transition-shadow duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 bg-navy text-white transition-shadow duration-300 ${
         scrolled ? 'shadow-[0_14px_34px_-16px_rgba(11,18,32,0.65)]' : ''
       }`}
     >

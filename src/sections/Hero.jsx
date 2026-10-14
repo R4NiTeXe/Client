@@ -82,16 +82,20 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={rootRef} id="home" className="relative overflow-hidden bg-navy text-white">
-      <div
-        ref={gridRef}
-        aria-hidden="true"
-        className="absolute inset-[-2rem]"
-        style={GRID_BACKGROUND}
-      />
+    <section
+      ref={rootRef}
+      id="home"
+      className="relative scroll-mt-16 overflow-hidden bg-navy text-white sm:scroll-mt-[4.5rem]"
+    >
+      {/* Outer layer: scroll parallax (smoother effects). Inner layer: pointer
+          drift. Two elements so the two systems never fight over one transform. */}
+      <div aria-hidden="true" className="absolute inset-[-2rem]" data-speed="0.94">
+        <div ref={gridRef} className="absolute inset-0" style={GRID_BACKGROUND} />
+      </div>
 
-      {/* Engraver pass — top hairline */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-white/10">
+      {/* Engraver pass — top hairline. Offset 4px so the travelling dot
+          clears the fixed navbar above the hero. */}
+      <div aria-hidden="true" className="absolute inset-x-0 top-1 h-px bg-white/10">
         <div data-hero-line className="hairline-engraved absolute inset-0 origin-left" />
         <div
           data-hero-dot
