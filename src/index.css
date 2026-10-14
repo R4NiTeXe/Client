@@ -207,7 +207,8 @@
     );
   }
 
-  /* Text wordmark used until a client logo is supplied */
+  /* Text portion of the brand lockup — the engraved-line mark (Logo.jsx)
+     sits beside it; display face + tight tracking keep them unified. */
   .wordmark {
     font-family: var(--font-display);
     font-weight: 800;

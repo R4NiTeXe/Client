@@ -3,7 +3,8 @@
   "short_name": "AtoZ Engraving",
   "icons": [
     { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
-    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
   ],
   "theme_color": "#101B2D",
   "background_color": "#101B2D",

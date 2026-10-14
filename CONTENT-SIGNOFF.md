@@ -38,9 +38,9 @@ bottom of the contact section — clicking it opens the location in Google Maps.
 | Item | Status | Notes |
 |---|---|---|
 | Official company name | ⬜ to confirm | Site currently uses "AtoZ Engraving Company" |
-| Logo | ⬜ pending | SVG or transparent PNG; a text wordmark is used until supplied |
-| Favicon / apple-touch-icon | ⚠ generated placeholder | `favicon.svg`, `favicon-32x32.png`, `apple-touch-icon.png` are derived from the text wordmark — replace when the logo arrives |
-| OG share image (`og-cover.png`) | ⚠ generated placeholder | 1200×630 branded card (navy + gold, services line); swap for a logo/photo version when available |
+| Logo | ✅ confirmed (14 Oct 2026) | In-house engraved-groove mark (`logo-mark.svg`) + text lockup; replaceable any time with a client-supplied logo |
+| Favicon / apple-touch-icon | ✅ generated from logo | `favicon.svg`, `favicon-32x32.png`, `apple-touch-icon.png`, `logo-512.png` all derive from the mark |
+| OG share image (`og-cover.png`) | ✅ generated from logo | 1200×630 branded card — mark + wordmark + services line |
 
 ## 4. Content approval ✅ RESOLVED (12 Oct 2026)
 

@@ -1,5 +1,6 @@
 import { ArrowUp } from 'lucide-react'
 import Container from './Container.jsx'
+import Logo from './Logo.jsx'
 import { company, contact } from '../data/company.js'
 import { telHref, waHref, mailtoHref, mapHref, formatAddress } from '../lib/contact.js'
 
@@ -24,7 +25,8 @@ export default function Footer() {
       <Container className="flex flex-col gap-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex flex-col gap-2">
-            <span className="wordmark text-lg text-white">
+            <span className="wordmark inline-flex items-center gap-2 text-lg text-white">
+              <Logo className="size-7" />
               AtoZ <span className="text-gold">Engraving</span>
             </span>
             <p className="max-w-xs text-sm text-white/60">{company.shortName} — engraving services.</p>

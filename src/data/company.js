@@ -30,11 +30,13 @@ export const site = {
 export const company = {
   name: 'AtoZ Engraving Company',
   shortName: 'AtoZ Engraving',
-  // Text wordmark until a client logo is supplied.
+  // Brand mark — engraved groove + diamond stylus tip (navy #101B2D /
+  // gold #F4B323, matches design tokens). Designed in-house, approved
+  // 14 Oct 2026. Full lockup = logo-mark.svg + text wordmark.
   logo: {
-    status: 'pending', // confirmed | pending
-    src: '',
-    alt: '',
+    status: 'confirmed', // confirmed | pending
+    src: '/logo-mark.svg',
+    alt: 'AtoZ Engraving engraved-line mark',
   },
   // Draft hero copy — neutral, no unverified claims (machine types,
   // tolerances, turnaround times, and industries served are banned).

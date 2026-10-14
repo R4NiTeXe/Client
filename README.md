@@ -23,7 +23,7 @@ Cloudinary API secret in any `VITE_` variable — `VITE_` values ship to the bro
 ```
 index.html              Meta tags, font, favicon link (static SEO defaults)
 public/
-  favicon.svg           Placeholder mark (replace with client logo when supplied)
+  favicon.svg           Brand mark (engraved-groove monogram, navy + gold)
   robots.txt            Allow-all; sitemap added after a domain exists
 src/
   components/           Navbar, Footer, ButtonLink (magnetic CTAs), SectionHeading,

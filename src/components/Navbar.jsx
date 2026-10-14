@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Menu, X, Quote } from 'lucide-react'
 import Container from './Container.jsx'
 import ButtonLink from './ButtonLink.jsx'
+import Logo from './Logo.jsx'
 
 const LINKS = [
   { href: '#home', label: 'Home' },
@@ -13,7 +14,12 @@ const LINKS = [
 
 function Wordmark() {
   return (
-    <a href="#home" className="wordmark text-lg text-white" aria-label="AtoZ Engraving — home">
+    <a
+      href="#home"
+      className="wordmark inline-flex items-center gap-2 text-lg text-white"
+      aria-label="AtoZ Engraving — home"
+    >
+      <Logo className="size-7" />
       AtoZ <span className="text-gold">Engraving</span>
     </a>
   )
